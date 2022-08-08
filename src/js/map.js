@@ -40,7 +40,6 @@ SingleMap.InitMap = function () {
         }),
     });
 
-
     SingleMap.mapTooltip = new ol.Overlay({
         element: document.getElementById("sl-tooltip"),
         autoPan: true,
@@ -49,8 +48,6 @@ SingleMap.InitMap = function () {
         }
     });
     SingleMap.map.addOverlay(SingleMap.mapTooltip);
-
-
 
     /*eventi mappa */
     SingleMap.map.on("pointermove", function (evt) {
@@ -70,6 +67,76 @@ SingleMap.InitMap = function () {
         }
     });
 
+    SingleMap.map.on("click", function (evt) {
+        SingleMap.lastMouseClickPixel = evt.pixel;
+        this.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
+            SingleMap.filterSingleFeature(feature);
+        });
+    });
+
+    SingleMap.goToLonLat = function (lon, lat, zoom) {
+        if (!zoom) {
+            zoom = 16;
+        }
+        let point = new ol.geom.Point([lon, lat]);
+        if (lon < 180) {
+            point = ol.proj.transform([lon, lat], "EPSG:4326", "EPSG:3857");
+        } else {
+            point = [lon, lat];
+        }
+        SingleMap.map.setView(
+            new ol.View({
+                center: point,
+                zoom: zoom,
+            })
+        );
+    };
+
+    // let addFeatureFlashToMap = function (feature) {
+    //     let featureOl = LamMap.convertGeoJsonFeatureToOl(payload.feature);
+    //     featureOl = LamMap.transform3857(featureOl, featureOl.srid);
+    //     LamMapInfo.addFeatureFlashToMap(featureOl);
+    //     setTimeout(function () {
+    //         LamMapInfo.clearLayerFlash();
+    //     }, 800);
+    // };
+
+    // let addFeatureFlashToMap = function (feature) {
+    //     return LamMap.addFeatureToMap(feature, feature.srid, vectorFlash);
+    // };
+    // let clearLayerFlash = function () {
+    //     vectorFlash.getSource().clear(true);
+    // };
+
+
+    SingleMap.transformGeometrySrid = function (geometryOl, sridSource, sridDest) {
+        return geometryOl.transform("EPSG:" + sridSource, "EPSG:" + sridDest);
+    };
+
+    SingleMap.ZoomAndFlashFeature = function (id) {
+        let featureZoom = SingleMap.features.filter(element => {
+            return element.id = id;
+        })
+        featureZoom = featureZoom[0];
+        if (!featureZoom) return;
+
+        //coordinata centrale
+        var coordinates = featureZoom.getGeometry().getCoordinates();
+        if (coordinates[0][0]) {
+            SingleMap.goToLonLat(coordinates[0][0], coordinates[0][1]);
+        } else {
+            SingleMap.goToLonLat(coordinates[0], coordinates[1]);
+        }
+
+        //LamMapInfo.addFeatureFlashToMap(featureOl);
+        //setTimeout(function () {
+        //    LamMapInfo.clearLayerFlash();
+        //}, 800);
+    }
+
+
+
+
     //Caricamento delle feature tool
     setTimeout(() => {
         layer = SingleMap.map.getLayers().item(1);
@@ -77,4 +144,5 @@ SingleMap.InitMap = function () {
         SingleMap.filteredFeatures = SingleMap.features;
         SingleMap.showFeatures()
     }, 2000);
+
 }

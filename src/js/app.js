@@ -28,7 +28,6 @@ var SingleMap = {}
 SingleMap.options = {}
 
 SingleMap.init = function (divId, options) {
-  debugger
   //sezione options
   SingleMap.options.jsonUrl = options.jsonUrl ? options.jsonUrl : null;
   SingleMap.options.pointColor = options.pointColor ? options.pointColor : [0, 0, 255];
@@ -37,9 +36,13 @@ SingleMap.init = function (divId, options) {
   SingleMap.options.circleRadius = options.circleRadius ? options.circleRadius : 7;
   SingleMap.options.tooltipProperty = options.tooltipProperty ? options.tooltipProperty : 7;
 
+  if (options.featureTemplate) {
+    SingleMap.options.featureTemplate = options.featureTemplate;
+  }
+
   var elem = document.querySelector('#' + divId);
-  elem.innerHTML = `<div id="sl-map" class="sl-map"></div>
-  <div id="sl-tools" class="sl-info">
+  elem.innerHTML = `<div id="sl-map" class="sl-map sl-box"></div>
+  <div id="sl-tools" class="sl-tools sl-box">
     <input type="search" id="sl-search" class="sl-input">
     <button onclick="SingleMap.search();" class="sl-btn">Ricerca</button>
   </div>
@@ -55,7 +58,6 @@ SingleMap.init = function (divId, options) {
     </div>
   </div>`;
   SingleMap.InitMap();
-
 };
 
 

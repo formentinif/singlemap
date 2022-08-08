@@ -1,0 +1,51 @@
+.sl-feature {
+    padding: 5px;
+    border: 1px solid var(--sl-color-darken);
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.sl-feature-title {
+    font-weight: bold;
+}
+
+
+.sl-card {
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    font-weight: 400;
+    overflow: hidden;
+    width: 100%;
+    z-index: 1;
+    position: relative;
+    background: #fff;
+    border-radius: 2px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 2%);
+}
+
+.sl-card-title {
+    align-items: center;
+    color: var(--sl-color);
+    display: flex;
+    flex-grow: 1;
+    font-weight: 700;
+    font-size: 1.5rem;
+    padding: 0.75rem 0rem;
+}
+
+.sl-card-footer {
+    margin-top: 0.5rem;
+    background-color: transparent;
+    border-top: 1px solid #ededed;
+    align-items: stretch;
+    display: flex;
+    padding-top: 0.5rem;
+}

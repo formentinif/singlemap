@@ -24,7 +24,7 @@ function combineAppJs() {
 		"./src/js/map.js",
 		"./src/js/tooltip.js",
 		"./src/js/features.js",
-        
+		"./src/js/resources.js",	
       ])
       .pipe(concat("singlemap.js"))
       //.pipe(uglify())
@@ -35,7 +35,9 @@ function combineAppJs() {
 function combineCss() {
   return gulp
     .src([
-      "./src/css/app.css",   
+      "./src/css/app.css",
+	  "./src/css/ring.css",	 
+	  "./src/css/features.css",  
       "./src/css/ol.css",
     ])
     .pipe(concat("singlemap.css"))
