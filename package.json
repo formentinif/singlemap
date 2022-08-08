@@ -1,0 +1,29 @@
+{
+  "name": "singlemap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+	"lite": "lite-server -c lite-server.json",
+    "lite-tests": "lite-server -c lite-server-tests.json",
+    "start": "npm run lite",
+    "dist": "gulp clean copy scripts",
+    "tests": "npm run lite-tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/formentinif/singlemap.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/formentinif/singlemap/issues"
+  },
+  "homepage": "https://github.com/formentinif/singlemap#readme",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-concat": "^2.6.1",
+    "lite-server": "^2.6.1"
+  }
+}
