@@ -31,16 +31,15 @@
   <script src="app.js"></script>
 
   <script>
-
-    //SingleMap.jsonUrl = 'https://geoservert.comune.re.it/geoserver/geo_re/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=geo_re%3AWIFI_REGGIO&maxFeaures=-1&outputFormat=application%2Fjson&srsname=EPSG:3857';
-    SingleMap.jsonUrl = 'https://geoserver.comune.re.it/geoserver/geo_re/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=geo_re%3AWIFI_REGGIO&outputFormat=application%2Fjson&srsname=EPSG:3857&maxFeaures=-1';
-    SingleMap.pointColor = [0, 0, 255];
-    SingleMap.fillColor = [0, 255, 0];
-    SingleMap.circleWidth = 2;
-    SingleMap.circleRadius = 7;
-    SingleMap.tooltipProperty = "NOME_IMPIANTO";
-
-    SingleMap.init("sl-map-container");
+    let options = {
+      jsonUrl: 'https://geoserver.comune.re.it/geoserver/geo_re/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=geo_re%3AWIFI_REGGIO&outputFormat=application%2Fjson&srsname=EPSG:3857&maxFeaures=-1',
+      pointColor: [0, 0, 255],
+      fillColor: [0, 255, 0],
+      circleWidth: 2,
+      circleRadius: 7,
+      tooltipProperty: "NOME_IMPIANTO",
+    }
+    SingleMap.init("sl-map-container", options);
   </script>
 
 </body>

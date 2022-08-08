@@ -25,9 +25,12 @@
 
 
 var SingleMap = {}
+SingleMap.options = {}
+
+
+
 
 SingleMap.InitMap = function () {
-
   SingleMap.circleStyle = new ol.style.Style({
     fill: new ol.style.Fill({
       color: [255, 255, 255, 0.01],
@@ -37,12 +40,12 @@ SingleMap.InitMap = function () {
       width: 1,
     }),
     image: new ol.style.Circle({
-      radius: SingleMap.circleRadius,
+      radius: SingleMap.options.circleRadius,
       fill: new ol.style.Fill({
-        color: SingleMap.fillColor,
+        color: SingleMap.options.fillColor,
       }),
       stroke: new ol.style.Stroke({
-        color: [255, 0, 0],
+        color: SingleMap.options.pointColor,
         width: 2,
       })
     }),
@@ -50,7 +53,7 @@ SingleMap.InitMap = function () {
 
   SingleMap.vectorLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
-      url: SingleMap.jsonUrl,
+      url: SingleMap.options.jsonUrl,
       format: new ol.format.GeoJSON(),
     }),
     style: SingleMap.circleStyle
@@ -188,7 +191,15 @@ SingleMap.search = function () {
 
 
 
-SingleMap.init = function (divId) {
+SingleMap.init = function (divId, options) {
+
+  //sezione options
+  SingleMap.options.jsonUrl = options.jsonUrl ? options.jsonUrl : null;
+  SingleMap.options.pointColor = options.pointColor ? options.pointColor : [0, 0, 255];
+  SingleMap.options.fillColor = options.fillColor ? options.fillColor : [0, 255, 0];
+  SingleMap.options.circleWidth = options.circleWidth ? options.circleWidth : 2;
+  SingleMap.options.circleRadius = options.circleRadius ? options.circleRadius : 7;
+  SingleMap.options.tooltipProperty = options.tooltipProperty ? options.tooltipProperty : 7;
 
   var elem = document.querySelector('#' + divId);
   elem.innerHTML = `<div id="sl-map" class="sl-map"></div>
